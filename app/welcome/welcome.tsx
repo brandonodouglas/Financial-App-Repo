@@ -21,8 +21,8 @@ export function Welcome() {
       </body>
       <hr></hr>
       <div className="flex justify-center">
-        <button className="border-2 p-2 border-solid mt-5 mb-5 bg-green-500 hover:bg-green-700">⬆️ Upload CSV</button>
-
+        <button className="border-2 p-2 border-solid mt-5 mb-5 bg-green-500 hover:bg-green-700">⬆️ Upload .XLS</button>
+        <button className="border-2 p-2 border-solid ml-5 mt-5 mb-5 w-x bg-red-500 hover:bg-red-700">⬆️ Upload .CSV</button>
       </div>
 
       <footer><p className='text-center'>Coded by @brandonodouglas</p></footer>
