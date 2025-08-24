@@ -1,14 +1,17 @@
-// For input of copied and pasted textual transaction data from bank website
+import { useState } from 'react';
+
+// <button type="submit" className="border-green-400 text-2xl border-1 border-red-white p-3 font-extralight">[ ANALYSE ]</button>
+
 export function TransactionInput() {
+
+  
   return (
-    <div className="flex justify-center items-center bg-blue-400 h-50 w-screen">
-      <form>
-      <input placeholder="Paste Transactions Here" className="placeholder-gray-200 bg-amber-50 text-2xl p-3 border-green-300 border-1 text-black m-3" name="query" />
-        <button className="border-green-400 text-2xl border-1 border-red-white p-3 font-extralight" type="submit">ANALYSE</button>
+    <div className="flex flex-col justify-center items-center bg-blue-400 h-50 w-screen">
+      <p className="font-light">Analyse Your Transactions Below:</p>
+      <form className="border-2 border-white p-3">
+        <input name="transactions" placeholder="Enter Transactions" className="placeholder-gray-200 bg-amber-50 text-2xl p-3 border-green-300 border-1 text-black m-3" />
+        <input type="submit" />	
       </form>
-
-
-
     </div>
-  )
+  );
 }
