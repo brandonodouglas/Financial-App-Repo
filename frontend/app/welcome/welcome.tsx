@@ -5,12 +5,12 @@ export function Welcome() {
   return (
     <div className="flex justify-center bg-blue-500">
  <main className='bg-blue-500'>
-  <h1 className="text-center">BudgetWithBrandon</h1>
-  <p className="text-center">Your AI Budgeting <strong>companion</strong></p>
+  <h1 className="text-center font-light">BudgetWithBrandon</h1>
+  <p className="text-center font-extralight">Your AI Budgeting <strong className="font-extralight">companion</strong></p>
   
    
 
-   <p className='text-center'>Coded by @brandonodouglas</p>
+   <p className='text-center font-extralight'>Coded by @brandonodouglas.</p>
     </main>
     </div>
    
