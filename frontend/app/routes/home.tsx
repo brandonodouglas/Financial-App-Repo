@@ -1,6 +1,7 @@
 import type { Route } from "./+types/home";
 import { Welcome } from "../welcome/welcome";
 import { TransactionInput } from "../components/transactioninput";
+import { Chatbot } from "~/components/chatbot";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -13,7 +14,7 @@ export default function Home() {
   return (
   <section>
     <Welcome />
-        <TransactionInput />
+    <Chatbot />
 
   </section>
   );
