@@ -5,7 +5,7 @@ export function Welcome() {
   return (
     <div className="flex justify-center bg-blue-500">
  <main className='bg-blue-500'>
-  <h1 className="text-center font-light">BudgetWithBrandon</h1>
+  <h1 className="text-center font-light">💰 BudgetWithBrandon</h1>
   <p className="text-center font-extralight">Your AI Budgeting <strong className="font-extralight">companion</strong></p>
   
    
