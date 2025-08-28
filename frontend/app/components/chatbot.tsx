@@ -17,7 +17,7 @@ export function Chatbot() {
    
 
     axios.post('http://localhost:3000/transactions', {
-      query,
+      TransactionData: query,
     })
       .then(function (response) {
         console.log(response);

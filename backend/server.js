@@ -1,12 +1,34 @@
-const express = require('express')
+import dotenv from "dotenv"
+import express from "express"
 const app = express()
-const cors = require('cors')
+import cors from "cors"
 const port = 3000
+import mongoose from "mongoose"
+dotenv.config();
+
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// Placeholder for mongodb database
+// DATABASE STUFF]
+
+
+// mongoose reference code - https://www.geeksforgeeks.org/mongodb/mongoose-schemas-creating-a-model/
+// app.js
+let db = mongoose.connect(process.env.ATLAS_URI, { useNewUrlParser: true, useUnifiedTopology: true, dbName: 'budgetwithbrandonDB', })
+  .then(() => console.log('Connected to MongoDB...'))
+  .catch(err => console.log('Could not connect to MongoDB...', err));
+
+// Mongoose schema
+const userSchema = new mongoose.Schema({
+  transaction: String,
+})
+
+// Model
+const userModel = mongoose.model('user-transactions', userSchema);
+
+
+// Placeholder for mongodb database -- replace with actual code
 let transactionsDatabase = [];
 
 
@@ -20,14 +42,29 @@ app.get('/transactions', (req, res, next) => {
 
 });
 
+
 // POST endpoint for transaction data
-app.post('/transactions', (req, res, next) => {
+app.post('/transactions', async (req, res, next) => {
   const newTransaction = {
     TransactionData: req.body,
   };
-  console.log('The request body is: ' + req.body)
-  transactionsDatabase.push(newTransaction.TransactionData.query)
-  console.log(transactionsDatabase[0]);
+
+  const brandon = new userModel({ transaction: JSON.stringify(newTransaction) });
+    const number = await userModel.countDocuments();
+    if(number == 0) {
+   await brandon.save();
+   console.log('Added data to the database as the database is empty')
+
+    } else {
+      console.log("Database is already full so can't add any new transactional data.");
+    }
+
+
+
+
+
+
+
   res.send("success");
 });
 
