@@ -52,11 +52,8 @@ app.get('/usernames', async (req, res, next) => {
 
 // POST endpoint for usernames
 app.post('/usernames', async (req, res, next) => {
-  const newUser = {
-    userName: req.body
-  };
-
-  const registerUser = new userModel({ _id: 1, userName: JSON.stringify(newUser) });
+  
+  const registerUser = new userModel({ _id: 1, userName: req.body.Username});
   const number = await userModel.countDocuments();
   // For now, limit number of users to one user -- me!
   if (number == 0) {
