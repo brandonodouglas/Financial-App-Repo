@@ -10,7 +10,7 @@ dotenv.config();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// DATABASE STUFF]
+// DATABASE STUFF
 
 
 // mongoose reference code - https://www.geeksforgeeks.org/mongodb/mongoose-schemas-creating-a-model/
@@ -19,22 +19,59 @@ let db = mongoose.connect(process.env.ATLAS_URI, { useNewUrlParser: true, useUni
   .then(() => console.log('Connected to MongoDB...'))
   .catch(err => console.log('Could not connect to MongoDB...', err));
 
+
+
 // Mongoose schema
 const userSchema = new mongoose.Schema({
-  transaction: String,
+  _id: Number, 
+  userName: String,
 })
 
+
+
 // Model
-const userModel = mongoose.model('user-transactions', userSchema);
+const userModel = mongoose.model('users', userSchema);
 
 
-// Placeholder for mongodb database -- replace with actual code
-let transactionsDatabase = [];
+// Placeholders for mongodb database -- replace with actual code
+let usernamesDatabase = [];
 
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
+
+
+// GET Endpoint for usernames 
+app.get('/usernames', async (req, res, next) => {
+
+  const users = await userModel.find();
+  res.send('[SERVER]: Here is a list of currently registered users: ' + users);
+
+});
+
+// POST endpoint for usernames
+app.post('/usernames', async (req, res, next) => {
+  const newUser = {
+    userName: req.body
+  };
+
+  const registerUser = new userModel({ _id: 1, userName: JSON.stringify(newUser) });
+  const number = await userModel.countDocuments();
+  // For now, limit number of users to one user -- me!
+  if (number == 0) {
+    await registerUser.save();
+    
+    
+  ;
+    console.log('[SERVER]: Added user data to database as username is not currently taken')
+
+  } else {
+    console.log("[SERVER]: The maximum amount of users are currently signed up for the website, registration denied..");
+  }
+  res.send("success");
+});
+
 
 // GET Endpoint for transaction data
 app.get('/transactions', (req, res, next) => {
@@ -50,21 +87,14 @@ app.post('/transactions', async (req, res, next) => {
   };
 
   const brandon = new userModel({ transaction: JSON.stringify(newTransaction) });
-    const number = await userModel.countDocuments();
-    if(number == 0) {
-   await brandon.save();
-   console.log('Added data to the database as the database is empty')
+  const number = await userModel.countDocuments();
+  if (number == 0) {
+    await brandon.save();
+    console.log('Added data to the database as the database is empty')
 
-    } else {
-      console.log("Database is already full so can't add any new transactional data.");
-    }
-
-
-
-
-
-
-
+  } else {
+    console.log("Database is already full so can't add any new transactional data.");
+  }
   res.send("success");
 });
 

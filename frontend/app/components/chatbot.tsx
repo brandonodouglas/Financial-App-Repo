@@ -28,15 +28,45 @@ export function Chatbot() {
 
 
   };
+  // Handles the username input on the landing page and stores in a database
+  function handleSubmit(formData: { get: (arg0: string) => any; }) {
+    const query = formData.get("query");
+    alert(`You name is: ' ${query}'`);
+    axios.post('http://localhost:3000/usernames', {
+      Username: query,
+    })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
+  {/* 
+    <form action={chatbot}>
+          <input name="query" className="border-1" type="text" placeholder="Upload CSV here" />
+          <button type="submit">Upload your csvt</button>
+        </form>
+  */}
+  
   return (
     <div className="flex flex-col items-center bg-white h-screen w-screen">
-      <div className="flex flex-col text-black mt-10 text-base/9">
-        <p className="text-black text-5xl font-semibold">Brandroid Chat Bot 🤖💬</p>
-        <p>[BRANDROID]: Hey, I'm Brandroid! 👋😊 . Enter your transaction data below to get started.</p>
-        <form action={chatbot}>
-          <input name="query" className="border-1" type="text" placeholder="Enter transaction data" />
-          <button type="submit">Chatbot</button>
+      <div className=" text-black mt-5 text-center">
+        <p>Hey there 👋☺️.<p>Ready to transform <strong>your </strong>financial life? </p>Enter your username below to get started.</p>
+      
+         <form action={handleSubmit}>
+          <input name="query" className="border-1" type="text" placeholder="Enter username" />
+          <button className="p-0 border-black border-1 text-shadow-md bg-amber-500 text-white" type="submit">SUBMIT</button>
         </form>
+
+         {/* 
+    <form action={chatbot}>
+          <input name="query" className="border-1" type="text" placeholder="Upload CSV here" />
+          <button type="submit">Upload your csvt</button>
+        </form>
+  */}
+        
       </div>
     </div>
   );
