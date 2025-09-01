@@ -62,11 +62,13 @@ app.post('/usernames', async (req, res, next) => {
     
   ;
     console.log('[SERVER]: Added user data to database as username is not currently taken')
+      res.send("success");
+
 
   } else {
     console.log("[SERVER]: The maximum amount of users are currently signed up for the website, registration denied..");
+    res.send("success")
   }
-  res.send("success");
 });
 
 

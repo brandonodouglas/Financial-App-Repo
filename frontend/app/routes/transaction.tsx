@@ -1,3 +1,3 @@
 export default function Transaction() {
-    return <div>Welcome to the transaction page!</div>
+    return <div>Hello there Brandon! Welcome to the transactions adding page. Add your transactions below</div>
 }
